@@ -25,6 +25,14 @@ module.exports = function() {
 
       edge.mount(edgeComponentsPath);
 
+      const edgeHelpers = app.components.config().edge != undefined ? app.components.config().edge.helpers : {}
+
+      for (const key in edgeHelpers) {
+        if (edgeHelpers.hasOwnProperty(key)) {
+          edge.global(key, edgeHelpers[key])
+        }
+      }
+
       edge.use(supercharged.wire, {
         recurring: process.env.NODE_ENV === 'development'
       });
