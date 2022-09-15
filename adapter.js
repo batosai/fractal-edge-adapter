@@ -23,7 +23,13 @@ module.exports = function() {
 
       const edgeComponentsPath = app.components.config().edge != undefined ? app.components.config().edge.components.path : app.components.config().path
 
-      edge.mount(edgeComponentsPath);
+      const edgeComponentsPrefix = app.components.config().edge.components.prefix != undefined ? app.components.config().edge.components.prefix : null
+
+      if (edgeComponentsPrefix) {
+        edge.mount(edgeComponentsPrefix, edgeComponentsPath);
+      } else {
+        edge.mount(edgeComponentsPath);
+      }
 
       const edgeHelpers = app.components.config().edge != undefined ? app.components.config().edge.helpers : {}
 

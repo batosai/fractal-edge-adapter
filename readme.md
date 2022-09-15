@@ -14,6 +14,7 @@ Then configure your Fractal instance:
 
 ```js
 fractal.components.set('ext', '.edge'); // look for files with a .edge file extension
+fractal.components.set('edge.components.prefix', 'prefix')); // option: mount components in prefix, sample : @!prefix.button()
 fractal.components.set('edge.components.path', path.join(__dirname, 'views')); // option: add specific path for edge components
 fractal.components.set('edge.helpers', {
   hello: () => 'world',
