@@ -1,6 +1,6 @@
 {
   "name": "@jrmc/fractal-edge-adapter",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Use edge templates with Fractal.",
   "main": "adapter.js",
   "repository": {
@@ -10,9 +10,9 @@
   "author": "Jeremy Chaufourier jeremy@chaufourier.fr",
   "license": "MIT",
   "dependencies": {
-    "@frctl/fractal": "^1.5.14",
+    "@frctl/fractal": "^1.5.15",
     "edge-supercharged": "^3.1.1",
-    "edge.js": "^5.5.0"
+    "edge.js": "^5.5.1"
   },
   "devDependencies": {}
 }
