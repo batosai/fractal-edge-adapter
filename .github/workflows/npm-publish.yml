@@ -1,0 +1,37 @@
+name: NPM publish
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: halvardssm/github-action-tag-release@1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: "./package.json" # optional, will use ./package.json by default
+      - run: |
+          echo 'Release created: ${{steps.version.outputs.release_created}}' # 'true' or 'false'
+          echo 'Release exists: ${{steps.version.outputs.release_exists}}' # 'true' or 'false'
+          echo 'Release tag: ${{steps.version.outputs.release_tag}}' # The tag from package.json
+      - if: ${{steps.release.outputs.release_exists == 'true'}}
+        run: |
+
+  publish-npm:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
